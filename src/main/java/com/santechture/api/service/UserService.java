@@ -9,6 +9,8 @@ import com.santechture.api.exception.BusinessExceptions;
 import com.santechture.api.repository.UserRepository;
 import com.santechture.api.security.config.JwtService;
 import com.santechture.api.validation.AddUserRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
@@ -54,10 +58,10 @@ public class UserService {
                 .build();
 
 
+        log.info("Admin Id : " + adminId);
+        log.info("userName : " + username);
 
-
-
-        return new GeneralResponse().response(new AdminDto(admin));
+        return new GeneralResponse().response(new UserDto(user));
     }
 
 }
